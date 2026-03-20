@@ -14,7 +14,7 @@ import SectionTile from "./Shared/SectionTile";
 
 const Category = () => {
   return (
-    <section className="my-24">
+    <section className="my-24 max-w-7xl mx-auto">
       {/* Section Title */}
      <SectionTile
      subHeading={'"From 11:00am to 10:00pm"'} heading={'Order Online'}> 

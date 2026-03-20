@@ -9,7 +9,7 @@ import img6 from '../assets/home/06.png'
 
 const Banner = () => {
   return (
-    <div className="mb-10 max-w-[1440px] mx-auto">
+    <div className="mb-10 max-w-7xl mx-auto">
       <Carousel autoPlay={true} infiniteLoop={true}>
         <div>
           <img className="rounded-2xl" src={img1} />
