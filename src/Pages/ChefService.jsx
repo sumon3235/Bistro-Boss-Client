@@ -1,8 +1,8 @@
-import chefImg from "../../assets/home/chef-service.jpg";
+import chefImg from "../assets/home/chef-service.jpg";
 
 const ChefService = () => {
   return (
-    <div className="my-20 max-w-7xl mx-auto">
+    <div className="my-20 max-w-7xl mx-auto px-2 md:px-3">
       <div
         className="bg-cover bg-center p-10 md:p-24 rounded-xl"
         style={{ backgroundImage: `url(${chefImg})` }}

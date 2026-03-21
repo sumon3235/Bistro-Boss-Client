@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SectionTile from "../../Components/Shared/SectionTile";
+import SectionTile from "../Components/Shared/SectionTile";
 import MenuItem from "./MenuItem";
 
 const PopulerItem = () => {

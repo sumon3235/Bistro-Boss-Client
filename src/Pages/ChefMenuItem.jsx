@@ -2,7 +2,7 @@ const ChefMenuItem = ({ item }) => {
   const { name, image, recipe } = item;
 
   return (
-    <div className="w-full max-w-[370px] bg-[#F3F3F3] border border-[#E8E8E8] rounded-lg hover:scale-105 transition-all duration-500 cursor-pointer">
+    <div className="w-full max-w-[370px] mx-auto bg-[#F3F3F3] border border-[#E8E8E8] rounded-lg hover:scale-105 transition-all duration-500 cursor-pointer">
       <figure>
         <img src={image} alt={name} className="w-full h-60 object-cover rounded-lg" />
       </figure>

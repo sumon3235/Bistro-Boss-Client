@@ -1,7 +1,8 @@
-import Banner from "../../Components/Banner";
-import Category from "../../Components/Category";
+import Banner from "../Components/Banner";
+import Category from "../Components/Category";
 import ChefRecomended from "./ChefRecomended";
 import ChefService from "./ChefService";
+import Featured from "./Featured";
 import PopulerItem from "./PopulerItem";
 
 
@@ -14,6 +15,7 @@ const Home = () => {
             <ChefService></ChefService>
             <PopulerItem></PopulerItem>
             <ChefRecomended></ChefRecomended>
+            <Featured></Featured>
         </div>
     );
 };
