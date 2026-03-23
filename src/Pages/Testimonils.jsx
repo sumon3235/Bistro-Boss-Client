@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import SectionTile from "../Components/Shared/SectionTile";
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
@@ -17,6 +18,10 @@ const Testimonials = () => {
 
   return (
     <section className="py-16 px-6 max-w-7xl mx-auto">
+
+    {/* Title Section */}
+    <SectionTile subHeading={"---What Our Clients Say---"} heading={"TESTIMONIALS"}/>
+
       <Swiper
       loop={true}
         navigation={true}
