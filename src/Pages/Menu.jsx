@@ -6,12 +6,16 @@ import useMenu from "../hooks/useMenu";
 import MenuCategory from "./MenuCategory";
 import desserBg from "../assets/menu/dessert-bg.jpeg"
 import pizzaBg from "../assets/menu/pizza-bg.jpg"
+import saladBg from "../assets/menu/salad-bg.jpg"
+import soupBg from "../assets/menu/soup-bg.jpg"
 
 const Menu = () => {
   const [menu] = useMenu();
   const Offered = menu.filter((item) => item.category === "offered");
   const desserts = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
+  const salad = menu.filter((item) => item.category === "salad");
+  const soup = menu.filter((item) => item.category === "soup");
   
 
   return (
@@ -71,6 +75,33 @@ const Menu = () => {
         </div>
       </section>
 
+    {/* Salad Section */}
+     <section className="mb-20">
+        {/* bg Img */}
+        <Cover img={saladBg} title={"Salad"} subTitle={"Crisp, fresh, and bursting with flavor—our salads are the perfect healthy delight"}></Cover>
+        {/* Filter a Category and send props for MeneCategory*/}
+        <MenuCategory items={salad}></MenuCategory>
+        {/* btn */}
+        <div className="flex justify-center mt-10">
+          <button className="btn bg-orange-500 hover:bg-orange-600">
+            ORDER YOUR FAVOURITE FOOD
+          </button>
+        </div>
+      </section>
+    
+    {/* Soups Section */}
+     <section className="mb-20">
+        {/* bg Img */}
+        <Cover img={soupBg} title={"Soups"} subTitle={"A perfect blend of aromatic herbs and fresh vegetables in every spoonful"}></Cover>
+        {/* Filter a Category and send props for MeneCategory*/}
+        <MenuCategory items={soup}></MenuCategory>
+        {/* btn */}
+        <div className="flex justify-center mt-10">
+          <button className="btn bg-orange-500 hover:bg-orange-600">
+            ORDER YOUR FAVOURITE FOOD
+          </button>
+        </div>
+      </section>
 
     </div>
   );
