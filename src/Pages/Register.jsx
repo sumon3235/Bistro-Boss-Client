@@ -5,12 +5,25 @@ import ReCAPTCHA from "react-google-recaptcha";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { useAuth } from "../context/useAuth";
 
 const Register = () => {
   const recaptchaRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
   const [verified, setVerified] = useState(false);
   const [showRecaptcha, setShowRecaptcha] = useState(false);
+  const { createUser, updateUserProfile, googleLogin } = useAuth();
+
+  // Google Login
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        toast.success('Google Login Succesfull')
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
+  }
 
   const handleRecaptcha = (value) => {
     setVerified(!!value);
@@ -26,10 +39,35 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const photo = e.target.photo.value;
-    console.log(name, email, password, photo);
-    recaptchaRef.current.reset();
-    setVerified(false);
-  };
+
+    // Password validation
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters!");
+      return;
+    }
+
+    createUser(email, password)
+      .then(() => {
+
+        // update Profile
+        updateUserProfile(name, photo)
+          .then(() => {
+            toast.success("Registration Successful!");
+
+            // rest a Recaptcha
+            if (recaptchaRef.current) {
+              recaptchaRef.current.reset();
+            }
+            setVerified(false);
+          })
+          .catch(error => {
+            toast.error(error.message);
+          });
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
+  }
 
   return (
     <>
@@ -40,7 +78,7 @@ const Register = () => {
       <div className="min-h-[60vh] flex items-center justify-center bg-[#0f0f19] px-4 py-6">
         <div className="w-full max-w-md bg-[#1a1f2e] rounded-2xl p-10 shadow-xl">
 
-        {/* Title Section */}
+          {/* Title Section */}
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-white uppercase tracking-widest font-serif">
               Bistro Boss
@@ -51,7 +89,7 @@ const Register = () => {
           </div>
 
           <form onSubmit={handleRegister} className="flex flex-col gap-5">
-
+            {/* name */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-gray-400 uppercase tracking-widest">Full Name</label>
               <input
@@ -63,7 +101,7 @@ const Register = () => {
                 className="bg-[#0f0f19] text-white text-sm px-4 py-3 rounded-lg border border-white/10 outline-none focus:border-[#BB8506] transition-colors duration-300 placeholder:text-gray-600"
               />
             </div>
-
+            {/* email */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-gray-400 uppercase tracking-widest">Email</label>
               <input
@@ -75,7 +113,7 @@ const Register = () => {
                 className="bg-[#0f0f19] text-white text-sm px-4 py-3 rounded-lg border border-white/10 outline-none focus:border-[#BB8506] transition-colors duration-300 placeholder:text-gray-600"
               />
             </div>
-
+            {/* photoUrl */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-gray-400 uppercase tracking-widest">Photo URL</label>
               <input
@@ -86,7 +124,7 @@ const Register = () => {
                 className="bg-[#0f0f19] text-white text-sm px-4 py-3 rounded-lg border border-white/10 outline-none focus:border-[#BB8506] transition-colors duration-300 placeholder:text-gray-600"
               />
             </div>
-
+            {/* password */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-gray-400 uppercase tracking-widest">Password</label>
               <div className="relative">
@@ -145,8 +183,8 @@ const Register = () => {
             <div className="flex-1 h-px bg-white/10" />
           </div>
 
-          <button className="w-full flex items-center justify-center gap-3 border border-white/10 text-white text-sm py-3 rounded-lg hover:bg-white/5 transition-colors duration-300">
-           <FcGoogle size={25}></FcGoogle>
+          <button onClick={handleGoogleLogin} className="w-full flex items-center justify-center gap-3 border border-white/10 text-white text-sm py-3 rounded-lg hover:bg-white/5 transition-colors duration-300">
+            <FcGoogle size={25}></FcGoogle>
             Continue with Google
           </button>
 
@@ -162,5 +200,6 @@ const Register = () => {
     </>
   );
 };
+
 
 export default Register;

@@ -1,14 +1,16 @@
 import { Helmet } from "react-helmet-async";
 import orderBg from "../assets/shop/banner2.jpg";
 import Cover from "../Components/Shared/Cover";
-import { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../hooks/useMenu";
 import ChefMenuItem from "./ChefMenuItem";
+import { useLocation } from "react-router";
+import { useState } from "react";
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const location = useLocation();
+  const [tabIndex, setTabIndex] = useState(location?.state?.tabIndex || 0);
   const [menu] = useMenu();
 
   const offered = menu.filter((item) => item.category === "offered");
@@ -20,54 +22,54 @@ const Order = () => {
   const gridClass = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6";
 
   return (
-    <div className="max-w-[1350px] mx-auto my-16 px-6 md:px-8 lg:px-2">
+    <div className="max-w-[1350px] mx-auto mb-16 px-6 md:px-8 lg:px-5">
       <Helmet>
         <title>Bistro Boss | Order</title>
       </Helmet>
 
       <Cover img={orderBg} title="OUR SHOP" subTitle="Would You Like To Try Dish?" />
 
-      <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-        <TabList className="mt-20 mb-5 flex justify-center">
-          <Tab>Salad</Tab>
-          <Tab>Pizza</Tab>
-          <Tab>Soups</Tab>
-          <Tab>Desserts</Tab>
-          <Tab>Offered</Tab>
-        </TabList>
+        <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+          <TabList className="mt-20 mb-5 flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <Tab>Salad</Tab>
+            <Tab>Pizza</Tab>
+            <Tab>Soups</Tab>
+            <Tab>Desserts</Tab>
+            <Tab>Offered</Tab>
+          </TabList>
 
-        <TabPanel>
-          <div className={gridClass}>
-            {salad.map((item) => <ChefMenuItem key={item._id} item={item} />)}
-          </div>
-        </TabPanel>
+          <TabPanel>
+            <div className={gridClass}>
+              {salad.map((item) => <ChefMenuItem key={item._id} item={item} />)}
+            </div>
+          </TabPanel>
 
-        <TabPanel>
-          <div className={gridClass}>
-            {pizza.map((item) => <ChefMenuItem key={item._id} item={item} />)}
-          </div>
-        </TabPanel>
+          <TabPanel>
+            <div className={gridClass}>
+              {pizza.map((item) => <ChefMenuItem key={item._id} item={item} />)}
+            </div>
+          </TabPanel>
 
-        <TabPanel>
-          <div className={gridClass}>
-            {soup.map((item) => <ChefMenuItem key={item._id} item={item} />)}
-          </div>
-        </TabPanel>
+          <TabPanel>
+            <div className={gridClass}>
+              {soup.map((item) => <ChefMenuItem key={item._id} item={item} />)}
+            </div>
+          </TabPanel>
 
-        <TabPanel>
-          <div className={gridClass}>
-            {desserts.map((item) => <ChefMenuItem key={item._id} item={item} />)}
-          </div>
-        </TabPanel>
+          <TabPanel>
+            <div className={gridClass}>
+              {desserts.map((item) => <ChefMenuItem key={item._id} item={item} />)}
+            </div>
+          </TabPanel>
 
-        <TabPanel>
-          <div className={gridClass}>
-            {offered.map((item) => <ChefMenuItem key={item._id} item={item} />)}
-          </div>
-        </TabPanel>
+          <TabPanel>
+            <div className={gridClass}>
+              {offered.map((item) => <ChefMenuItem key={item._id} item={item} />)}
+            </div>
+          </TabPanel>
 
-      </Tabs>
-    </div>
+        </Tabs>
+      </div>
   );
 };
 

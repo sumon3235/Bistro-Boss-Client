@@ -8,15 +8,16 @@ import desserBg from "../assets/menu/dessert-bg.jpeg"
 import pizzaBg from "../assets/menu/pizza-bg.jpg"
 import saladBg from "../assets/menu/salad-bg.jpg"
 import soupBg from "../assets/menu/soup-bg.jpg"
-
+import { useNavigate } from "react-router";
 const Menu = () => {
+
+  const navigate = useNavigate();
   const [menu] = useMenu();
   const Offered = menu.filter((item) => item.category === "offered");
   const desserts = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const salad = menu.filter((item) => item.category === "salad");
   const soup = menu.filter((item) => item.category === "soup");
-  
 
   return (
     <div>
@@ -41,7 +42,7 @@ const Menu = () => {
 
         {/* btn */}
         <div className="flex justify-center mt-10">
-          <button className="btn bg-orange-500 hover:bg-orange-600">
+          <button onClick={() => navigate("/order", { state: { tabIndex: 4 } })} className="btn bg-orange-500 hover:bg-orange-600">
            ORDER YOUR FAVOURITE FOOD
           </button>
         </div>
@@ -55,7 +56,7 @@ const Menu = () => {
         <MenuCategory items={desserts}></MenuCategory>
         {/* btn */}
         <div className="flex justify-center mt-10">
-          <button className="btn bg-orange-500 hover:bg-orange-600">
+          <button onClick={() => navigate("/order", { state: { tabIndex: 3 }})} className="btn bg-orange-500 hover:bg-orange-600">
             ORDER YOUR FAVOURITE FOOD
           </button>
         </div>
@@ -69,7 +70,7 @@ const Menu = () => {
         <MenuCategory items={pizza}></MenuCategory>
         {/* btn */}
         <div className="flex justify-center mt-10">
-          <button className="btn bg-orange-500 hover:bg-orange-600">
+          <button onClick={() => navigate("/order", { state: { tabIndex: 1 } })} className="btn bg-orange-500 hover:bg-orange-600">
             ORDER YOUR FAVOURITE FOOD
           </button>
         </div>
@@ -83,7 +84,7 @@ const Menu = () => {
         <MenuCategory items={salad}></MenuCategory>
         {/* btn */}
         <div className="flex justify-center mt-10">
-          <button className="btn bg-orange-500 hover:bg-orange-600">
+          <button onClick={() => navigate("/order", { state: { tabIndex: 0 } })} className="btn bg-orange-500 hover:bg-orange-600">
             ORDER YOUR FAVOURITE FOOD
           </button>
         </div>
@@ -97,7 +98,7 @@ const Menu = () => {
         <MenuCategory items={soup}></MenuCategory>
         {/* btn */}
         <div className="flex justify-center mt-10">
-          <button className="btn bg-orange-500 hover:bg-orange-600">
+          <button onClick={() => navigate("/order", { state: { tabIndex: 2 } })} className="btn bg-orange-500 hover:bg-orange-600">
             ORDER YOUR FAVOURITE FOOD
           </button>
         </div>
