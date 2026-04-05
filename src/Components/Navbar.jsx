@@ -3,10 +3,11 @@ import { Link, NavLink } from "react-router";
 import { useAuth } from "../context/useAuth";
 import toast from "react-hot-toast";
 import { FiLogIn, FiUserPlus } from "react-icons/fi";
+import useCart from "../hooks/useCart";
+import { IoCart } from "react-icons/io5";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const cartCount = 3;
 
   const navLinks = [
     { to: "/", label: "Home" },
@@ -17,6 +18,7 @@ const Navbar = () => {
   ];
 
   const { user, setUser, logOut } = useAuth();
+  const [cart] = useCart();
 
   const handleLogout = () => {
     logOut()
@@ -66,24 +68,14 @@ const Navbar = () => {
         {/* Right */}
         <div className="flex items-center gap-5">
           {/* Cart */}
-          <button className="relative text-white/70 hover:text-white transition-colors">
-            <svg
-              className="w-[18px] h-[18px]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              viewBox="0 0 24 24"
-            >
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
-            </svg>
-            {cartCount > 0 && (
+          <NavLink to="/dashboard/cart" className="relative text-white/70 hover:text-white transition-colors">
+              <IoCart></IoCart>
+            {cart.length > 0 && (
               <span className="absolute -top-1.5 -right-1.5 bg-yellow-500 text-[#0a0a14] text-[9px] font-bold w-[15px] h-[15px] rounded-full flex items-center justify-center">
-                {cartCount}
+                {cart.length}
               </span>
             )}
-          </button>
+          </NavLink>
 
           <div className="hidden md:flex">
             {!user ? (

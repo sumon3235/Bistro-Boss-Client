@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import ReCAPTCHA from "react-google-recaptcha";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
@@ -14,11 +14,18 @@ const Register = () => {
   const [showRecaptcha, setShowRecaptcha] = useState(false);
   const { createUser, updateUserProfile, googleLogin } = useAuth();
 
+  // Redirect user
+  const navigate = useNavigate();
+  const location = useLocation()
+
+  const from = location.state?.from.pathname || "/";
+
   // Google Login
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {
         toast.success('Google Login Succesfull')
+        navigate(from, {replace:true})
       })
       .catch(error => {
         toast.error(error.message)
@@ -53,7 +60,7 @@ const Register = () => {
         updateUserProfile(name, photo)
           .then(() => {
             toast.success("Registration Successful!");
-
+            navigate(from, {replace:true})
             // rest a Recaptcha
             if (recaptchaRef.current) {
               recaptchaRef.current.reset();

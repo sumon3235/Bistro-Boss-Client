@@ -4,22 +4,26 @@ import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../context/useAuth";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 
 const Login = () => {
 
     const { loginUser, googleLogin } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         loginUser(email, password)
-            .then((res) => {
-                console.log(res)
+            .then(() => {
                 toast.success('Login Succesful')
+                navigate(from, {replace:true})
             })
             .catch(error => {
                 toast.error(error.message)
@@ -31,6 +35,7 @@ const Login = () => {
         googleLogin()
             .then(() => {
                 toast.success('Google Login Succesfull')
+                navigate(from, {replace:true})
             })
             .catch(error => {
                 toast.error(error.message)
@@ -134,7 +139,7 @@ const Login = () => {
                     {/* Register link */}
                     <p className="text-center text-xs text-gray-500 mt-6">
                         Don't have an account?{" "}
-                        <Link to="/register" className="text-[#BB8506] hover:underline">
+                        <Link state={{ from: location.state?.from }} to="/register" className="text-[#BB8506] hover:underline">
                             Sign up
                         </Link>
                     </p>

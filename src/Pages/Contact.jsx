@@ -39,6 +39,7 @@ const Contact = () => {
         },
     ];
 
+    // Handle Contact From Data
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
@@ -66,7 +67,7 @@ const Contact = () => {
     return (
         <div className="max-w-[1350px] mx-auto px-5 md:px-2.5">
             <Helmet>
-                <title>Bistro Boss | Login</title>
+                <title>Bistro Boss | Contact</title>
             </Helmet>
 
             {/* bg img and title */}
