@@ -1,7 +1,6 @@
 import toast from "react-hot-toast";
 import SectionTile from "../Components/Shared/SectionTitle";
 import useCart from "../hooks/useCart";
-import { RiDeleteBin2Line } from "react-icons/ri";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Cart = () => {

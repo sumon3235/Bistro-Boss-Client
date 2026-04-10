@@ -8,5 +8,3 @@ const SectionTile = ({ heading, subHeading, width="md:w-5/12" }) => {
 };
 
 export default SectionTile;
-
-

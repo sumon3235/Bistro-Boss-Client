@@ -5,7 +5,6 @@ import { useAuth } from "../context/useAuth";
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth();
     const location = useLocation();
-    console.log(location)
 
     // Show loading spinner while checking auth status
     if (loading) {
