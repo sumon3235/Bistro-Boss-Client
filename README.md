@@ -36,7 +36,7 @@ Built with React on the frontend, with a supporting Node.js/Express backend.
 | Technology | Purpose |
 |---|---|
 | React 18 | UI Framework |
-| React Router v6 | Client-side routing |
+| React Router v7 | Client-side routing |
 | Tailwind CSS v3 | Styling |
 | DaisyUI | UI Components |
 | TanStack Query | Server state management |
@@ -136,16 +136,16 @@ nodemon index.js
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](screenshot/home.png)
+![Home Page](./Screenshot/home.png)
 
 ### Menu Page
-![Menu Page](screenshot/menu.png)
+![Menu Page](./Screenshot/menu.png)
 
 ### Dashboard
-![Dashboard](screenshot/dashboard.png)
+![Dashboard](./Screenshot/dashboard.png)
 
 ### Payment
-![Payment](screenshot/payment.png)
+![Payment](./Screenshot/payment.png)
 
 ## 👨‍💻 Developer
 
